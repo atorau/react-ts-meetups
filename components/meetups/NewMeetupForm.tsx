@@ -3,7 +3,7 @@ import { Meetup } from '../../shared/interfaces';
 import Card from '../ui/Card';
 import classes from './NewMeetupForm.module.css';
 
-const NewMeetupForm = (): React.ReactElement => {
+const NewMeetupForm = (props): React.ReactElement => {
   const titleInputRef = React.useRef('');
   const imageInputRef = React.useRef('');
   const addressInputRef = React.useRef('');
@@ -24,7 +24,7 @@ const NewMeetupForm = (): React.ReactElement => {
       description: enteredDescription,
     };
 
-    console.log(meetupData);
+    props.onAddMeetup(meetupData);
   };
 
   return (
