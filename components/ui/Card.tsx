@@ -1,8 +1,12 @@
 import React = require('react');
 import classes from './Card.module.css';
 
-const Card = (props) => {
-  return <div className={classes.card}>{props.children}</div>;
+interface Props {
+  children: JSX.Element
+}
+
+const Card = ({children}: Props) => {
+  return <div className={classes.card}>{children}</div>;
 };
 
 export default Card;

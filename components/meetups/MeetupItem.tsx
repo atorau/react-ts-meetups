@@ -1,9 +1,30 @@
 import React = require('react');
 import { Meetup } from '../../shared/interfaces';
+import FavoritesContext from '../../store/favorites-context';
 import Card from '../ui/Card';
 import classes from './MeetupItem.module.css';
 
 const MeetupItem = (props: Meetup): React.ReactElement => {
+  const favoritesContext = React.useContext(FavoritesContext);
+
+  const itemIsFavorite = favoritesContext.itemIsFavorite(props.id);
+
+  const toogleFavoriteStatusHandler = () => {
+    console.log(itemIsFavorite);
+    if (itemIsFavorite) {
+      console.log('entro')
+      favoritesContext.removeFavorite(props.id);
+    } else {
+      favoritesContext.addFavorite({
+        id: props.id,
+        title: props.title,
+        description: props.description,
+        image: props.image,
+        address: props.address,
+      });
+    }
+  };
+
   return (
     <li className={classes.item}>
       <Card>
@@ -16,7 +37,9 @@ const MeetupItem = (props: Meetup): React.ReactElement => {
           <p>{props.description}</p>
         </div>
         <div className={classes.actions}>
-          <button>To Favorites</button>
+          <button onClick={toogleFavoriteStatusHandler}>
+            {itemIsFavorite ? 'Renove From Favorites' : 'To Favorites'}
+          </button>
         </div>
       </Card>
     </li>
