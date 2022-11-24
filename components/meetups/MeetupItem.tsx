@@ -10,9 +10,7 @@ const MeetupItem = (props: Meetup): React.ReactElement => {
   const itemIsFavorite = favoritesContext.itemIsFavorite(props.id);
 
   const toogleFavoriteStatusHandler = () => {
-    console.log(itemIsFavorite);
     if (itemIsFavorite) {
-      console.log('entro')
       favoritesContext.removeFavorite(props.id);
     } else {
       favoritesContext.addFavorite({
